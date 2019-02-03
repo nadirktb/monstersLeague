@@ -2,14 +2,13 @@
 
 require __DIR__ . '/monster.php';
 
-function getMonsters()
-{
-    $monster1 = new Monster('Bodoi', 25, 1000, 500);
-    $monster2 = new Monster('Siriush', 30, 120, 300);
-    $monster3 = new Monster('Domovoi', 55, 300, 250);
-    //var_dump($monster1, $monster2);
-    return 
-       array ($monster1, $monster2, $monster3);
+function getMonsters() {
+    $bdd = new PDO('mysql:host=localhost;dbname=monsterleague', 'root', '');
+    $recuperation = $bdd->query('SELECT id, name, age, life, strength FROM monsters');
+    while ($donnees = $recuperation->fetch()) {
+        $monstersTab[] = new Monster($donnees['id'], $donnees['name'], $donnees['age'], $donnees['life'], $donnees['strength']); 
+    }
+    return $monstersTab;
 }
 
 /**
@@ -17,8 +16,7 @@ function getMonsters()
  *
  * @return array With keys winning_ship, losing_ship & used_jedi_powers
  */
-function fight(Monster $firstMonster, Monster $secondMonster)
-{
+function fight(Monster $firstMonster, Monster $secondMonster) {
     $firstMonsterLife = $firstMonster->getlife();
     $secondMonsterLife = $secondMonster->getlife();
 

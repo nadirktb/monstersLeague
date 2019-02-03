@@ -1,13 +1,15 @@
 <?php
 
 class Monster {
+	private $id;
 	private $name;
 	private $age;
 	private $life;
 	private $strength;
 
 	
-	function __construct($name, $age, $life, $strength){
+	function __construct($id, $name, $age, $life, $strength){
+		$this->id = $id;
 		$this->name = $name;
 		$this->age = $age;
 		$this->life = $life;
@@ -17,6 +19,10 @@ class Monster {
 	
 	function getlife(){
 		return $this->life;
+	}
+	
+	function getid(){
+		return $this->id;
 	}
 	
 	function getstrength(){
@@ -47,8 +53,6 @@ class Monster {
 	function setage($age){   
 		$this->age=$age;
 	}
-	
-	
 }
 
 
